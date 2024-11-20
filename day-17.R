@@ -72,7 +72,7 @@ p <- ggplot() +
   geom_sf(data = food_spots, size = 3, colour = "#EF3340") + 
   labs(title = title_text) + 
   theme_void() + 
-  theme(plot.title = element_markdown(size=14, family = "Lato")) + 
+  theme(plot.title = element_markdown(size=20, family = "Lato")) + 
   
 
   geom_segment(aes(x = 299749, xend = 299749 + 1000, y = 52773, yend = 52773 + 2000), colour = "#EF3340") + 
@@ -129,7 +129,7 @@ q <- ggplot() +
   ) +
   ggtext::geom_textbox(
     aes(x = 103.877, y = 1.225, 
-        label = "30 day map challenge<br>Day #19<br>Culinary Crossovers<br>Sean & Byron"), 
+        label = "30 day map challenge<br>Day #17<br>Culinary Crossovers<br>New York & Singapore<br>Sean & Byron"), 
     family = "Lato", color = "black", 
     box.color = NA, fill = NA, size = 3, hjust = 0.5, vjust = 0.5,
     width = unit(3, "in"), 
@@ -157,7 +157,7 @@ q <- ggplot() +
   ) +
   labs(title = title_text_sg) + 
   theme_void() + 
-  theme(plot.title = element_markdown(size=14, family = "Lato"),
+  theme(plot.title = element_markdown(size=20, family = "Lato"),
         text = element_text(family = "Lato")) 
 
 
@@ -172,8 +172,8 @@ combined_plot <- wrap_plots(plots, ncol = 2)
 
 
 # Display the combined plot
-combined_plot
+# combined_plot
 
 # Save the combined plot
-ggsave("output/combined_day19.jpg", combined_plot, bg = "white", width = 16, height = 8)
+ggsave("output/17-Sean-Byron-Collab.png", combined_plot, bg = "white", width = 16, height = 8)
 
