@@ -1,0 +1,140 @@
+---
+title: "day-19"
+author: "Byron"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: united
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(extrafont)
+library(tidygeocoder)
+library(classInt)
+library(purrr)
+library(viridis)
+library(ggtext)
+library(extrafont)
+library(ggimage)
+
+options(scipen = 999)
+
+# font_import()  
+# loadfonts()
+
+```
+
+# Playground
+
+```{r import_data, warning=FALSE, results='hide'}
+poi <- st_read("./sg-data/nypizzas.geojson")
+river <- st_read("./sg-data/focus-rivers-clipped.geojson")
+land <- st_read("./sg-data/focus-area-clipped.geojson")
+sea <- st_read("./sg-data/focus-sea.geojson")
+
+```
+
+# Font
+
+```{r load_fonts}
+# font_import(path = "./Data/Fonts", prompt = FALSE)
+# loadfonts(device = "pdf")
+
+# library(showtext)
+# font_add("custom_font", "./Data/Fonts/customfontold.ttf")
+# loadfonts()
+```
+
+```{r ggplot_basic}
+
+# ggplot() +
+#   # Layer 1: sg_buffered - polygon layer with color #b7d0b8
+#   geom_sf(data = sea, fill = "#b7d0b8", color = NA) +
+#   
+#   # Layer 2: sg - polygon layer with color #fff3cc
+#   geom_sf(data = land, fill = "#fff3cc", color = NA) +
+#   
+#   # Layer 3: lines - line layer with black color
+#   geom_sf(data = lines, color = "black", size = 0.5) +
+#   
+#   # Layer 4: poi - points layer, display Name attribute without circles
+#   geom_sf_text(data = poi, aes(label = Name), color = "black", size = 3, family = "Lato") +
+#   
+#   # Layer 5: termini - points layer, display Name attribute without circles, larger font
+#   geom_sf_text(data = termini, aes(label = Name), color = "black", size = 4, fontface = "bold", family = "Lato") +
+#   
+#   # Customize the theme
+#   theme_minimal(base_family = "Lato") +
+#   theme(
+#     axis.title = element_blank(),
+#     axis.text = element_blank(),
+#     axis.ticks = element_blank(),
+#     panel.grid = element_blank()
+#   )
+
+```
+
+# Styled ggplot
+
+```{r plot7}
+# sea <- st_transform(sea, crs = 4326)
+# land <- st_transform(land, crs = 4326)
+# lines <- st_transform(lines, crs = 4326)
+# poi <- st_transform(poi, crs = 4326)
+# termini <- st_transform(termini, crs = 4326)
+
+plot19 <- ggplot() +
+  geom_sf(data = sea, fill = "#ffffff", color = NA) +
+  geom_sf(data = land, fill = "#d3d3d3", color = NA) +
+  geom_sf(data = river, fill = "#ffffff", color = NA) +
+  geom_sf(data = poi, shape = 15, color = "black", size = 1) +
+  geom_sf_text(data = poi, aes(label = Restaurant), color = "black", size = 2, family = "Arial", vjust = -0.7) +
+  ggtext::geom_textbox(
+    aes(x = 103.872369, y = 1.280484, 
+        label = "Collaborative Map"), 
+    family = "Arial", color = "black", 
+    box.color = NA, fill = NA, size = 4, hjust = 0.5, vjust = 0.5,
+    width = unit(3, "in"), 
+    halign = 0.5, valign = 0.5, lineheight = 1.2
+  ) +
+  ggtext::geom_textbox(
+    aes(x = 103.872369, y = 1.271, 
+        label = "30 day map challenge<br>Day #19<br>Culinary Collaborations<br>Sean & Byron"), 
+    family = "Arial", color = "black", 
+    box.color = NA, fill = NA, size = 3, hjust = 0.5, vjust = 0.5,
+    width = unit(4, "in"), 
+    halign = 0.5, valign = 0.5, lineheight = 1.2
+  ) +
+  ggimage::geom_image(
+    aes(x = 103.872369, y = 1.287, image = "./sg-data/Blue.png"),
+    size = 0.06
+  ) +
+  theme_minimal(base_family = "Old Standard TT") +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+plot19
+```
+
+# Export
+
+```{r}
+png("19-Byron-half.png", width = 3200, height = 3200, res = 300)
+
+# Print the plot to the device
+print(plot19)
+
+# Close the device
+dev.off()
+```

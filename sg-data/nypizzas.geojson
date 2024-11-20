@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "nypizzas",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Restaurant": "Loui's NY Pizza Parlor" }, "geometry": { "type": "Point", "coordinates": [ 103.821332497856574, 1.25463355514535 ] } },
+{ "type": "Feature", "properties": { "Restaurant": "John's Pizzeria & Bakery" }, "geometry": { "type": "Point", "coordinates": [ 103.805086917882576, 1.287404201790392 ] } },
+{ "type": "Feature", "properties": { "Restaurant": "Yellow Cab Pizza Co." }, "geometry": { "type": "Point", "coordinates": [ 103.85654091384022, 1.292077411246701 ] } },
+{ "type": "Feature", "properties": { "Restaurant": "Blue Label Pizza & Wine" }, "geometry": { "type": "Point", "coordinates": [ 103.845752136799433, 1.280916961691027 ] } },
+{ "type": "Feature", "properties": { "Restaurant": "Sonny's Slice Shop" }, "geometry": { "type": "Point", "coordinates": [ 103.849113598737006, 1.286907241005192 ] } }
+]
+}
